@@ -52,6 +52,7 @@
   height: 100vh; /* 100% of viewport height */
   padding: 100px; /* Add padding for spacing */
   padding-top: 0px;
+  padding: 50px;
   background-color: green;
   overflow: auto;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
