@@ -20,8 +20,8 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <h1 className='header'>STOCKI</h1>
       <div>
+      <h1 className='header'>STOCKI</h1>
         <h3>Welcome to STOCKI, where you can get daily data on your favorite stocks.</h3>
         <h3>Choose from some popular stocks here:</h3>
         <NavBar />
