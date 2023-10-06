@@ -1,15 +1,20 @@
 @font-face {
-  font-family: 'Lato'; /* Use 'Lato' for the Lato font */
+  font-family: 'Lato'; 
   src: url('./fonts/lato.light.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Abel'; /* Use 'Dosis' for the Dosis font */
+  font-family: 'Abel'; 
   src: url('./fonts/abel.regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Engula';
+  src: url('.fonts/engula.regular.ttf') format('truetype');
 }
 
 
@@ -63,16 +68,18 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  align-items: center; /* Center content horizontally */
-  justify-content: flex-start; /* Align content to the top vertically */
-  height: 100vh; /* 100% of viewport height */
-  padding: 100px; /* Add padding for spacing */
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh; 
+  padding: 100px;
   padding-top: 0px;
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 20px;
-  /* background-color: #22A699; */
+  background-color: #22A699;
   background-color: #141E46;
+  border: 2px solid #22A699;
+  border-radius: 100px;
   overflow: auto;
 }
 
@@ -109,6 +116,8 @@ body {
 
 .stock-surfer-pro-button{
   background-color: #C70039;
+  font-size: x-large;
+  color: white;
 }
 .stock-surfer-pro-button:hover{
   background-color: #FF6969;

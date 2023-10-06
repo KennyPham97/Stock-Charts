@@ -1,0 +1,33 @@
+.watchlist {
+    list-style: none; 
+    text-align: right; 
+  }
+  
+  .list-item {
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center; 
+    margin-bottom: 5px; 
+  }
+  
+  .stock-symbol {
+    margin-right: 5px
+  }
+  
+  .remove-button {
+    background-color: transparent;
+    border: 1px solid white; 
+    cursor: pointer;
+    color: red;
+  }
+  .add-to-list-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+
+
+  
+
+  
+  

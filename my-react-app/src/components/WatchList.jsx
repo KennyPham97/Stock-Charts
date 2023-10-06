@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./WatchList.css";
 
 const WatchList = () => {
   const [ticker, setTicker] = useState("");
@@ -19,18 +20,22 @@ const WatchList = () => {
 
   return (
     <div className="everything">
+      <div className="add-to-list-button">
       <input
         className="input-field"
         placeholder="Stock Ticker"
         value={ticker}
         onChange={(e) => setTicker(e.target.value)}
       />
-      <div>
-        <button className="add-to-list-button" onClick={handleAddTicker}>
+
+      </div>
+      <div className="add-to-list-button">
+        <button onClick={handleAddTicker}>
           Add to Watchlist
         </button>
       </div>
-      <ul>
+
+      <ul className="watchlist">
         {watchlist.map((stock, index) => (
           <li key={index} className="list-item">
             <span className="stock-symbol">{stock.symbol}</span>

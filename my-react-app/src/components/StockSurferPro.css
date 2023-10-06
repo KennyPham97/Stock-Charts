@@ -1,16 +1,26 @@
 .h2 {
-    font-size: xx-large;
-    font-weight: bolder;
-    text-decoration: underline;
-    text-decoration-thickness: 1px; 
+  font-size: xx-large;
+  font-weight: bolder;
+  text-decoration: underline;
+  text-decoration-thickness: 1px; 
 }
 
-.pro-features{
-    display: flex;
-    justify-content: space-around;
+.pro-features {
+  display: flex;
+  justify-content: space-between;
 }
 
-.input-field-container{
-    display: flex;
-    justify-content: space-around;
+.input-field-container {
+  display: flex;
+  justify-content: space-between; 
 }
+
+.input-field-container .left-container {
+  flex: 1; 
+  width: 50%; 
+}
+.input-field-container .right-container {
+  flex: 2;
+
+}
+

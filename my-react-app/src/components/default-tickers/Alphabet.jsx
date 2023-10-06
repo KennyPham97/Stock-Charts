@@ -60,7 +60,9 @@ const Alphabet = () => {
           <p>{companyInfo.Name}({companyInfo.Symbol})</p>
           <p>Industry: {companyInfo.Industry}</p>
           <p>Sector: {companyInfo.Sector}</p>
-          <p>{companyInfo.Description}</p>
+          <p style={{ maxWidth: '400px', wordWrap: 'break-word', textAlign: 'center', margin: '0 auto' }}>
+            {companyInfo.Description}
+          </p>
         </ul>
       </div>
       <Plot data={chartData} layout={chartLayout} />

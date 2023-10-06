@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './NavBar.css'; // Import your CSS file for NavBar styling
+import React from 'react'
+import { Link } from 'react-router-dom'
+import './NavBar.css'
 
 const NavBar = () => {
   return (
@@ -18,4 +18,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default NavBar

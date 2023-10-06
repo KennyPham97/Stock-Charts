@@ -83,7 +83,7 @@ const StockSearch = () => {
           onChange={(e) => setTicker(e.target.value)}
           className="input-field"
         />
-        <button type="submit">Submit</button>
+        <button className="submit-button" type="submit">Submit</button>
       </form>
 
       {submitted && tickerNotFound && <p>Ticker not found</p>}
@@ -96,7 +96,9 @@ const StockSearch = () => {
             </p>
             <p>Industry: {companyInfo.Industry}</p>
             <p>Sector: {companyInfo.Sector}</p>
-            <p>{companyInfo.Description}</p>
+            <p style={{ maxWidth: '400px', wordWrap: 'break-word', textAlign: 'center', margin: '0 auto' }}>
+            {companyInfo.Description}
+            </p>
           </ul>
 
           <Plot
