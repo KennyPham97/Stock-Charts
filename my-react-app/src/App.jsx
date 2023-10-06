@@ -41,7 +41,7 @@ const App = () => {
           <Route path="/search" element={<StockSearch />} />
         </Routes>
         <h3>Get StockSurfer Pro to search any ticker and more advanced features</h3>
-        <button onClick={handleGetStockSurferProClick}>Get StockSurfer Pro</button>
+        <button className='stock-surfer-pro-button' onClick={handleGetStockSurferProClick}>Get StockSurfer Pro</button>
         {showStockSurferPro && <StockSurferPro />}
       </div>
     </div>

@@ -20,7 +20,7 @@ const SP500 = () => {
 
         for (const date in response.data['Time Series (Daily)']) {
           const closeValue = response.data['Time Series (Daily)'][date]['4. close'];
-          dates.unshift(date); // Reverse order to show the latest date first
+          dates.unshift(date); 
           closes.unshift(parseFloat(closeValue));
         }
 
@@ -49,6 +49,7 @@ const SP500 = () => {
     title: 'S&P 500 Daily Price',
     xaxis: { title: 'Date' },
     yaxis: { title: 'Closing Price' },
+    plot_bgcolor: 'FFF5E0',
   };
 
   return (
