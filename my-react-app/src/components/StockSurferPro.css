@@ -1,0 +1,16 @@
+.h2 {
+    font-size: xx-large;
+    font-weight: bolder;
+    text-decoration: underline;
+    text-decoration-thickness: 1px; 
+}
+
+.pro-features{
+    display: flex;
+    justify-content: space-around;
+}
+
+.input-field-container{
+    display: flex;
+    justify-content: space-around;
+}
