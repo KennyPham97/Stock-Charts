@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Lato'; /* Use 'Lato' for the Lato font */
+  src: url('./fonts/lato.light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Abel'; /* Use 'Dosis' for the Dosis font */
+  src: url('./fonts/abel.regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -52,10 +68,10 @@
   height: 100vh; /* 100% of viewport height */
   padding: 100px; /* Add padding for spacing */
   padding-top: 0px;
-  padding: 50px;
-  background-color: green;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #22A699;
   overflow: auto;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 h1 {
@@ -71,9 +87,24 @@ body {
   background-size: cover;
   background-position: center top;
   background-attachment: fixed;
+  font-family: 'Abel', sans-serif
+}
+
+.header {
+  font-size: 72px;
+  font-weight: 600; 
+  margin-bottom: 20px;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.chart-icon{
+  height: auto;
+  width: 100px;
+  margin-top: 0px;
+  padding-top: 0px;
 }
 
 
-.header{
-  
-}
+
+

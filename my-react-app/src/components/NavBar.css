@@ -1,0 +1,30 @@
+.nav-bar-container {
+    text-align: center;
+  }
+  
+  .NavBar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+  }
+  
+  .nav-button {
+    background-color: #F29727;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-button:hover {
+    background-color: #F24C3D;
+  }
+  
