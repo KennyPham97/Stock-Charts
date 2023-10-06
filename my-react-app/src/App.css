@@ -70,7 +70,8 @@
   padding-top: 0px;
   padding-left: 50px;
   padding-right: 50px;
-  background-color: #22A699;
+  /* background-color: #22A699; */
+  background-color: #141E46;
   overflow: auto;
 }
 
@@ -103,6 +104,13 @@ body {
   width: 100px;
   margin-top: 0px;
   padding-top: 0px;
+}
+
+.stock-surfer-pro-button{
+  background-color: #C70039;
+}
+.stock-surfer-pro-button:hover{
+  background-color: #FF6969;
 }
 
 

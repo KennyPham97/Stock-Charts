@@ -14,7 +14,8 @@
   }
   
   .nav-button {
-    background-color: #F29727;
+    /* background-color: #F29727; */
+    background-color: #C70039;
     color: white;
     border: none;
     border-radius: 5px;
@@ -25,6 +26,7 @@
   }
   
   .nav-button:hover {
-    background-color: #F24C3D;
+    /* background-color: #F24C3D; */
+    background-color: #FF6969;
   }
   
