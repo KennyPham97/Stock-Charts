@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Plot from 'react-plotly.js';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Plot from "react-plotly.js";
 
 const SP500 = () => {
   const [stockData, setStockData] = useState({});
@@ -10,17 +10,20 @@ const SP500 = () => {
 
   useEffect(() => {
     axios
-      .get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPY&apikey=TEPTNV3NRFJ3ZKWQ`)
+      .get(
+        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=SPY&apikey=TEPTNV3NRFJ3ZKWQ`
+      )
       .then((response) => {
-        console.log('Stock Data Response:', response.data);
-        setStockData(response.data['Time Series (Daily)']);
+        console.log("Stock Data Response:", response.data);
+        setStockData(response.data["Time Series (Daily)"]);
 
         const dates = [];
         const closes = [];
 
-        for (const date in response.data['Time Series (Daily)']) {
-          const closeValue = response.data['Time Series (Daily)'][date]['4. close'];
-          dates.unshift(date); 
+        for (const date in response.data["Time Series (Daily)"]) {
+          const closeValue =
+            response.data["Time Series (Daily)"][date]["4. close"];
+          dates.unshift(date);
           closes.unshift(parseFloat(closeValue));
         }
 
@@ -28,9 +31,11 @@ const SP500 = () => {
         setCloseList(closes);
       });
     axios
-      .get(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=SPY&apikey=TEPTNV3NRFJ3ZKWQ`)
+      .get(
+        `https://www.alphavantage.co/query?function=OVERVIEW&symbol=SPY&apikey=TEPTNV3NRFJ3ZKWQ`
+      )
       .then((response) => {
-        console.log('Company Info Response:', response.data);
+        console.log("Company Info Response:", response.data);
         setCompanyInfo(response.data);
       });
   }, []);
@@ -39,17 +44,17 @@ const SP500 = () => {
     {
       x: dateList,
       y: closeList,
-      type: 'scatter',
-      mode: 'lines',
-      marker: { color: 'black' },
+      type: "scatter",
+      mode: "lines",
+      marker: { color: "black" },
     },
   ];
 
   const chartLayout = {
-    title: 'S&P 500 Daily Price',
-    xaxis: { title: 'Date' },
-    yaxis: { title: 'Closing Price' },
-    plot_bgcolor: 'FFF5E0',
+    title: "S&P 500 Daily Price",
+    xaxis: { title: "Date" },
+    yaxis: { title: "Closing Price" },
+    plot_bgcolor: "FFF5E0",
   };
 
   return (
