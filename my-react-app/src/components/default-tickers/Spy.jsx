@@ -50,27 +50,32 @@ const SP500 = () => {
     },
   ];
 
+  // const chartLayout = {
+  //   title: "S&P 500 Daily Price",
+  //   xaxis: { title: "Date" },
+  //   yaxis: { title: "Closing Price" },
+  //   plot_bgcolor: "FFF5E0",
+  //   paper_bgcolor: 'white'
+  // };
   const chartLayout = {
     title: "S&P 500 Daily Price",
     xaxis: { title: "Date" },
     yaxis: { title: "Closing Price" },
-    plot_bgcolor: "FFF5E0",
+    plot_bgcolor: "FFF5E0",        // Background color of the plot area
+    paper_bgcolor: "white",        // Background color of the entire chart
+    font: { color: "black" },      // Font color
+    margin: {
+      l: 60,                      // Left margin
+      r: 20,                      // Right margin
+      t: 60,                      // Top margin
+      b: 60                       // Bottom margin
+    },
+    hovermode: "x",               // Display hover info on x-axis
   };
 
   return (
     <div>
       <h2>S&P 500 ETF</h2>
-      <div>
-        {/* <h3>Company Information</h3>
-        <ul>
-          <p>Symbol: {companyInfo.Symbol}</p>
-          <p>Name: {companyInfo.Name}</p>
-          <p>Industry: {companyInfo.Industry}</p>
-          <p>Sector: {companyInfo.Sector}</p>
-          <p>Market Cap: {companyInfo.MarketCapitalization}</p>
-          <p>Description: {companyInfo.Description}</p>
-        </ul> */}
-      </div>
       <Plot data={chartData} layout={chartLayout} />
     </div>
   );

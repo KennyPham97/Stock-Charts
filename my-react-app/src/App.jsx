@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import Spy from './components/Spy';
-import Apple from './components/Apple';
-import Amazon from './components/Amazon';
-import Tesla from './components/Tesla';
-import Alphabet from './components/Alphabet';
-import Netflix from './components/Netflix';
-import Facebook from './components/Facebook';
+import Spy from './components/default-tickers/Spy';
+import Apple from './components/default-tickers/Apple';
+import Amazon from './components/default-tickers/Amazon';
+import Tesla from './components/default-tickers/Tesla';
+import Alphabet from './components/default-tickers/Alphabet';
+import Netflix from './components/default-tickers/Netflix';
+import Facebook from './components/default-tickers/Facebook';
 import StockSearch from './components/StockSearch';
 import StockSurferPro from './components/StockSurferPro';
 import chartIcon from './images/chart-icon.png'; 
@@ -43,6 +43,7 @@ const App = () => {
         <h3>Get StockSurfer Pro to search any ticker and more advanced features</h3>
         <button className='stock-surfer-pro-button' onClick={handleGetStockSurferProClick}>Get StockSurfer Pro</button>
         {showStockSurferPro && <StockSurferPro />}
+        
       </div>
     </div>
   );
