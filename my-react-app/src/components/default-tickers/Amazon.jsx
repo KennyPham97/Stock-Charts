@@ -3,7 +3,6 @@ import axios from 'axios';
 import Plot from 'react-plotly.js';
 
 const Amazon = () => {
-  const [stockData, setStockData] = useState({});
   const [companyInfo, setCompanyInfo] = useState({});
   const [dateList, setDateList] = useState([]);
   const [closeList, setCloseList] = useState([]);
@@ -12,8 +11,7 @@ const Amazon = () => {
     axios
       .get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AMZN&apikey=TEPTNV3NRFJ3ZKWQ`)
       .then((response) => {
-        console.log('Stock Data Response:', response.data);
-        setStockData(response.data['Time Series (Daily)']);
+        console.log('Stock Data:', response.data);
 
         const dates = [];
         const closes = [];
@@ -30,7 +28,7 @@ const Amazon = () => {
     axios
       .get(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=AMZN&apikey=TEPTNV3NRFJ3ZKWQ`)
       .then((response) => {
-        console.log('Company Info Response:', response.data);
+        console.log('Company Info:', response.data);
         setCompanyInfo(response.data);
       });
   }, []);
