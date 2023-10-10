@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import Spy from "./components/default-tickers/Spy";
-import Apple from "./components/default-tickers/Apple";
-import Amazon from "./components/default-tickers/Amazon";
-import Tesla from "./components/default-tickers/Tesla";
-import Alphabet from "./components/default-tickers/Alphabet";
-import Netflix from "./components/default-tickers/Netflix";
-import Facebook from "./components/default-tickers/Facebook";
+import Spy from "./components/Spy";
+import Apple from "./components/Apple";
+import Amazon from "./components/Amazon";
+import Tesla from "./components/Tesla";
+import Alphabet from "./components/Alphabet";
+import Netflix from "./components/Netflix";
+import Facebook from "./components/Facebook";
 import StockSearch from "./components/StockSearch";
 import StockSurferPro from "./components/StockSurferPro";
 import chartIcon from "./assets/chart-icon.png";
 import "./App.css";
+import { ApiProvider } from './components/ApiContext';
+
+export const ApiContext = createContext();
 
 const App = () => {
   const [showStockSurferPro, setShowStockSurferPro] = useState(false);
@@ -21,6 +24,7 @@ const App = () => {
   };
 
   return (
+    <ApiProvider>
     <div className="app-container">
       <div>
         <img className="chart-icon" src={chartIcon} alt="Chart Icon"></img>
@@ -55,7 +59,11 @@ const App = () => {
         {showStockSurferPro && <StockSurferPro />}
       </div>
     </div>
+    </ApiProvider>
   );
 };
 
 export default App;
+
+
+
