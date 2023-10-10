@@ -3,6 +3,7 @@ import axios from "axios";
 import Plot from "react-plotly.js";
 import "./StockSearch.css";
 import FiveMinuteChart from "./FiveMinuteChart";
+import News from "./News";
 
 const API_KEY = "TEPTNV3NRFJ3ZKWQ";
 
@@ -274,7 +275,7 @@ const StockSearch = () => {
               }}
             />
           )}
-          <div>
+          <div className='fiveMinuteButton'>
             <button onClick={handleShowFiveMinuteChart}>
               {showFiveMinuteChart
                 ? "Hide 5 Minute Chart"
@@ -283,6 +284,9 @@ const StockSearch = () => {
           </div>
 
           {showFiveMinuteChart && <FiveMinuteChart ticker={ticker} />}
+          
+          <News tickerToFetch={ticker} />
+
         </div>
       )}
     </div>
