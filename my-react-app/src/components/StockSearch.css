@@ -12,4 +12,10 @@
 .submit-button{
   display: flex;
   justify-content: flex-start;
+
+}
+
+.fiveMinuteButton{
+  display: flex;
+  justify-content: flex-start;
 }
