@@ -12,7 +12,6 @@ import StockSearch from "./components/StockSearch";
 import StockSurferPro from "./components/StockSurferPro";
 import chartIcon from "./assets/chart-icon.png";
 import "./App.css";
-import { ApiProvider } from './components/ApiContext';
 
 export const ApiContext = createContext();
 
@@ -24,7 +23,6 @@ const App = () => {
   };
 
   return (
-    <ApiProvider>
     <div className="app-container">
       <div>
         <img className="chart-icon" src={chartIcon} alt="Chart Icon"></img>
@@ -59,7 +57,6 @@ const App = () => {
         {showStockSurferPro && <StockSurferPro />}
       </div>
     </div>
-    </ApiProvider>
   );
 };
 

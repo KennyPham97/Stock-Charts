@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Plot from 'react-plotly.js';
 
-const API_KEY = 'TEPTNV3NRFJ3ZKWQ';
+const API_KEY = import.meta.env.VITE_SOME_KEY;
 
 const FiveMinuteChart = ({ ticker }) => {
   const [fiveMinuteDateList, setFiveMinuteDateList] = useState([]);

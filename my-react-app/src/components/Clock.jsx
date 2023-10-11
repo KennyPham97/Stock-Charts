@@ -11,7 +11,7 @@ const Clock = () => {
   setInterval(UpdateTime)
   return (
     <div>
-      <h3>{ctime}</h3>
+      <h2>{ctime}</h2>
 
     </div>
   )

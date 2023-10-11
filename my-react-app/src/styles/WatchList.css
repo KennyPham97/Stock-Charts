@@ -19,6 +19,7 @@
     border: 1px solid white; 
     cursor: pointer;
     color: red;
+    margin-left: 15px;
   }
   .add-to-list-button {
     display: flex;

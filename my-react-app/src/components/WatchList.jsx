@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./WatchList.css";
+import "../styles/WatchList.css";
 
 const WatchList = () => {
   const [ticker, setTicker] = useState("");
@@ -25,7 +25,12 @@ const WatchList = () => {
         className="input-field"
         placeholder="Stock Ticker"
         value={ticker}
-        onChange={(e) => setTicker(e.target.value)}
+        onChange={(e) => {
+          const input = e.target.value;
+          const letterInput = input.replace(/[^A-Za-z]/g, "");
+          setTicker(letterInput);
+        }}
+        maxLength={5}
       />
 
       </div>

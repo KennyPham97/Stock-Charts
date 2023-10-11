@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Plot from "react-plotly.js";
-import "./StockSearch.css";
+import "../styles/StockSearch.css";
 import FiveMinuteChart from "./FiveMinuteChart";
 import News from "./News";
 
-const API_KEY = "TEPTNV3NRFJ3ZKWQ";
+const API_KEY = import.meta.env.VITE_SOME_KEY;
 
 const StockSearch = () => {
   const [ticker, setTicker] = useState("");
-  const [stockData, setStockData] = useState({});
   const [companyInfo, setCompanyInfo] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [tickerNotFound, setTickerNotFound] = useState(false);
@@ -27,39 +26,41 @@ const StockSearch = () => {
         `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${tickerToFetch}&apikey=${API_KEY}`
       )
       .then((response) => {
-        console.log("Stock Data:", response.data);
-        setStockData(response.data["Time Series (Daily)"]);
+        if (response.data["Time Series (Daily)"]) {
+          console.log("Stock Data:", response.data);
+          const dates = [];
+          const closes = [];
+          const opens = [];
+          const highs = [];
+          const lows = [];
 
-        const dates = [];
-        const closes = [];
-        const opens = [];
-        const highs = [];
-        const lows = [];
+          for (const date in response.data["Time Series (Daily)"]) {
+            const dailyData = response.data["Time Series (Daily)"][date];
+            const closeValue = parseFloat(dailyData["4. close"]);
+            const openValue = parseFloat(dailyData["1. open"]);
+            const highValue = parseFloat(dailyData["2. high"]);
+            const lowValue = parseFloat(dailyData["3. low"]);
 
-        for (const date in response.data["Time Series (Daily)"]) {
-          const dailyData = response.data["Time Series (Daily)"][date];
-          const closeValue = parseFloat(dailyData["4. close"]);
-          const openValue = parseFloat(dailyData["1. open"]);
-          const highValue = parseFloat(dailyData["2. high"]);
-          const lowValue = parseFloat(dailyData["3. low"]);
+            dates.unshift(date);
+            closes.unshift(closeValue);
+            opens.unshift(openValue);
+            highs.unshift(highValue);
+            lows.unshift(lowValue);
+          }
 
-          dates.unshift(date);
-          closes.unshift(closeValue);
-          opens.unshift(openValue);
-          highs.unshift(highValue);
-          lows.unshift(lowValue);
+          setDateList(dates);
+          setCloseList(closes);
+          setOpenList(opens);
+          setHighList(highs);
+          setLowList(lows);
+          setTickerNotFound(false); // Valid ticker found
+        } else {
+          setTickerNotFound(true);
         }
-
-        setDateList(dates);
-        setCloseList(closes);
-        setOpenList(opens);
-        setHighList(highs);
-        setLowList(lows);
       })
       .catch((error) => {
         console.error("Error fetching stock data:", error);
         setTickerNotFound(true);
-        setStockData({});
         setCompanyInfo({});
       });
 
@@ -80,10 +81,9 @@ const StockSearch = () => {
     e.preventDefault();
     setSubmitted(true);
 
-    if (!ticker) {
+    if (!ticker || ticker.length < 1 || ticker.length > 5) {
       setTickerNotFound(true);
     } else {
-      setTickerNotFound(false);
       fetchStockData(ticker);
     }
   };
@@ -99,36 +99,23 @@ const StockSearch = () => {
           type="text"
           placeholder="Stock Ticker"
           value={ticker}
-          onChange={(e) => setTicker(e.target.value)}
+          onChange={(e) => {
+            const input = e.target.value;
+            const letterInput = input.replace(/[^A-Za-z]/g, "");
+            setTicker(letterInput);
+          }}
           className="input-field"
+          maxLength={5}
         />
         <button className="submit-button" type="submit">
           Submit
         </button>
       </form>
 
-      {submitted && tickerNotFound && <p>Ticker not found</p>}
+      {submitted && tickerNotFound && <p>Please enter a valid stock ticker</p>}
 
       {submitted && !tickerNotFound && dateList.length > 0 && (
         <div>
-          <ul>
-            <p>
-              {companyInfo.Name}({companyInfo.Symbol})
-            </p>
-            <p>Industry: {companyInfo.Industry}</p>
-            <p>Sector: {companyInfo.Sector}</p>
-            <p
-              style={{
-                maxWidth: "400px",
-                wordWrap: "break-word",
-                textAlign: "center",
-                margin: "0 auto",
-              }}
-            >
-              {companyInfo.Description}
-            </p>
-          </ul>
-
           <div>
             <label htmlFor="chartType">Select Chart Type:</label>
             <select
@@ -216,9 +203,9 @@ const StockSearch = () => {
                 title: {
                   text: `${ticker} Daily Candlestick Chart`,
                   font: {
-                    color: "white", 
-                    family: "Arial, sans-serif", 
-                    size: 18, 
+                    color: "white",
+                    family: "Arial, sans-serif",
+                    size: 18,
                   },
                 },
                 plot_bgcolor: "black",
@@ -241,41 +228,41 @@ const StockSearch = () => {
                   title: {
                     text: "Date",
                     font: {
-                      color: "white", 
-                      family: "Arial, sans-serif", 
-                      size: 18, 
+                      color: "white",
+                      family: "Arial, sans-serif",
+                      size: 18,
                     },
                   },
                   tickfont: {
-                    color: "white", 
-                    family: "Arial, sans-serif", 
-                    size: 14, 
+                    color: "white",
+                    family: "Arial, sans-serif",
+                    size: 14,
                   },
                 },
                 yaxis: {
                   title: {
                     text: "Price",
                     font: {
-                      color: "white", 
-                      family: "Arial, sans-serif", 
-                      size: 18, 
+                      color: "white",
+                      family: "Arial, sans-serif",
+                      size: 18,
                     },
                   },
                   tickfont: {
-                    color: "white", 
-                    family: "Arial, sans-serif", 
-                    size: 14, 
+                    color: "white",
+                    family: "Arial, sans-serif",
+                    size: 14,
                   },
                 },
                 font: {
                   color: "white",
                   family: "Arial, sans-serif",
-                  size: 14, 
+                  size: 14,
                 },
               }}
             />
           )}
-          <div className='fiveMinuteButton'>
+          <div className="fiveMinuteButton">
             <button onClick={handleShowFiveMinuteChart}>
               {showFiveMinuteChart
                 ? "Hide 5 Minute Chart"
@@ -284,9 +271,8 @@ const StockSearch = () => {
           </div>
 
           {showFiveMinuteChart && <FiveMinuteChart ticker={ticker} />}
-          
-          <News tickerToFetch={ticker} />
 
+          <News tickerToFetch={ticker} API_KEY={API_KEY} />
         </div>
       )}
     </div>
@@ -294,3 +280,4 @@ const StockSearch = () => {
 };
 
 export default StockSearch;
+
