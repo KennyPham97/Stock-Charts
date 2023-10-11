@@ -37,7 +37,7 @@ const Spy = () => {
   }, [API_KEY, symbol]);
 
   const chartLayout = {
-    title: "S&P 500 Stock Daily Price",
+    title: "S&P 500 Daily Price",
     xaxis: { title: "Date" },
     yaxis: { title: "Closing Price" },
     plot_bgcolor: "FFF5E0",
