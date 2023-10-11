@@ -37,7 +37,7 @@ const Spy = () => {
   }, [API_KEY, symbol]);
 
   const chartLayout = {
-    title: "S&P 500 Daily Price hi",
+    title: "S&P 500 Daily Price",
     xaxis: { title: "Date" },
     yaxis: { title: "Closing Price" },
     plot_bgcolor: "FFF5E0",
@@ -45,7 +45,7 @@ const Spy = () => {
 
   return (
     <div>
-      <h2>S&P 500 ETF (SPY)</h2>
+      <h2>S&P 500 ETF hello(SPY)</h2>
       <Plot data={chartData} layout={chartLayout} />
     </div>
   );
