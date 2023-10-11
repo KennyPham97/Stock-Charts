@@ -1,7 +1,7 @@
 import React from 'react';
 import StockSearch from './StockSearch'; 
 import WatchList from './WatchList';
-import './StockSurferPro.css';
+import '../styles/StockSurferPro.css';
 
 const StockSurferPro = () => {
   return (
