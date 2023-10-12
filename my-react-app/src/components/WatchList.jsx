@@ -35,7 +35,7 @@ const WatchList = () => {
 
       </div>
       <div className="add-to-list-button">
-        <button onClick={handleAddTicker}>
+        <button className="button" onClick={handleAddTicker}>
           Add to Watchlist
         </button>
       </div>

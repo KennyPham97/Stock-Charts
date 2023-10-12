@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
 const News = ({ tickerToFetch, API_KEY }) => {
   const [newsData, setNewsData] = useState([]);
 
