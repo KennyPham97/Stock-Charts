@@ -1,25 +1,29 @@
 .input-field {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    width: 100px;
-    display: flex;
-    justify-content: flex-start;
-    
-  }
-
-.submit-button{
-  display: flex;
-  justify-content: flex-start;
-
-}
-
-.fiveMinuteButton{
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 100px;
   display: flex;
   justify-content: flex-start;
 }
 
-.company-info{
+.submit-button {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a8df8e;
+  color: black;
+  width: 150px;
+  text-align: center;
+}
+
+.fiveMinuteButton {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.company-info {
   margin-bottom: 20px;
 }

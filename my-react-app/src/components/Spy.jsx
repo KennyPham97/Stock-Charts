@@ -41,6 +41,12 @@ const Spy = () => {
     xaxis: { title: "Date" },
     yaxis: { title: "Closing Price" },
     plot_bgcolor: "FFF5E0",
+    margin: {
+      l: 50,
+      r: 20, 
+      t: 50, 
+      b: 50  
+    }
   };
 
   return (

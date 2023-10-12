@@ -25,6 +25,18 @@
     display: flex;
     justify-content: flex-end;
   }
+.button{
+  margin-top: 10px;
+  background-color: #A8DF8E;
+  color: black;
+  width: 150px;
+}
+
+.input-field{
+  width: 129px;
+
+}
+
 
 
 

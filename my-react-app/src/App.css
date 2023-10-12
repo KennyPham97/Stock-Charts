@@ -80,6 +80,10 @@
   overflow: auto;
 }
 
+.app-container.pro {
+  background-color: black; 
+}
+
 h1 {
   font-size: 36px; 
   margin-bottom: 20px; 
@@ -96,6 +100,9 @@ body {
   font-family: 'Abel', sans-serif
 }
 
+body.pro {
+  background-image: url('./assets/market3.jpeg');
+}
 .header {
   font-size: 72px;
   font-weight: 600; 
@@ -118,6 +125,24 @@ body {
 }
 .stock-surfer-pro-button:hover{
   background-color: #FF6969;
+}
+.feature-button{
+  background-color: #C70039;
+  font-size: x-large;
+  color: white;
+  margin-bottom: 20px;
+}
+.feature-button:hover{
+  background-color: #FF6969;
+}
+
+.feature-columns {
+  opacity: 0;
+  transition: opacity 2.0s ease; 
+}
+
+.feature-columns.visible {
+  opacity: 1;
 }
 
 

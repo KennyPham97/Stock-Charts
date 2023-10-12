@@ -54,6 +54,12 @@ const Facebook = () => {
     xaxis: { title: 'Date' },
     yaxis: { title: 'Closing Price' },
     plot_bgcolor: 'FFF5E0',
+    margin: {
+      l: 50,
+      r: 20, 
+      t: 50, 
+      b: 50  
+    }
   };
 
   return (
@@ -63,9 +69,6 @@ const Facebook = () => {
           <h2>{companyInfo.Name} ({companyInfo.Symbol})</h2>
           <p>Industry: {companyInfo.Industry}</p>
           <p>Sector: {companyInfo.Sector}</p>
-          <p style={{ maxWidth: '400px', wordWrap: 'break-word', textAlign: 'center', margin: '0 auto' }}>
-            {companyInfo.Description}
-          </p>
         </ul>
       </div>
       <Plot data={chartData} layout={chartLayout} />
