@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Spy from "./components/Spy";
@@ -11,10 +11,15 @@ import Facebook from "./components/Facebook";
 import StockSearch from "./components/StockSearch";
 import StockSurferPro from "./components/StockSurferPro";
 import chartIcon from "./assets/chart-icon.png";
-import "./App.css";
 import Features from "./components/Features";
+import "./App.css";
+
+export const ApiContext = createContext();
 
 const App = () => {
+  const [apiURL, setApiURL] = useState("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}")
+  const apiKEY = import.meta.env.VITE_SOME_KEY
+
   const location = useLocation();
   const [showFeatures, setShowFeatures] = useState(false);
 
@@ -56,6 +61,7 @@ const App = () => {
           Welcome to StockSurfer, where you can get data on your favorite stocks.
         </h3>
         {isProRoute ? null : <NavBar />}
+        <ApiContext.Provider value={{ apiKEY, apiURL }}>
         <Routes>
           <Route path="*" element={<Spy />} />
           <Route path="/" element={<Spy />} />
@@ -69,6 +75,7 @@ const App = () => {
           <Route path="/search" element={<StockSearch />} />
           <Route path="/pro" element={<StockSurferPro />} />
         </Routes>
+        </ApiContext.Provider>
         {isProRoute ? null : (
           <div>
             <div>

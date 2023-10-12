@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext} from "react";
 import axios from "axios";
 import Plot from "react-plotly.js";
-
-const API_KEY = import.meta.env.VITE_SOME_KEY;
+import { ApiContext } from "../App";
 
 const Spy = () => {
   const symbol = "SPY";
   const [chartData, setChartData] = useState([]);
+  const { apiKEY, apiURL } = useContext(ApiContext);
 
   useEffect(() => {
     axios
       .get(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}`
+        `${apiURL}/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKEY}`
       )
       .then((response) => {
         console.log("Stock Data", response.data);
@@ -34,7 +34,7 @@ const Spy = () => {
 
         setChartData([data]);
       });
-  }, [API_KEY, symbol]);
+  }, [apiKEY, symbol]);
 
   const chartLayout = {
     title: "S&P 500 Daily Price",
