@@ -1,5 +1,70 @@
+// import React, { useState, createContext } from "react";
+// import { Routes, Route } from "react-router-dom";
+// import NavBar from "./components/NavBar";
+// import Spy from "./components/Spy";
+// import Apple from "./components/Apple";
+// import Amazon from "./components/Amazon";
+// import Tesla from "./components/Tesla";
+// import Alphabet from "./components/Alphabet";
+// import Netflix from "./components/Netflix";
+// import Facebook from "./components/Facebook";
+// import StockSearch from "./components/StockSearch";
+// import StockSurferPro from "./components/StockSurferPro";
+// import chartIcon from "./assets/chart-icon.png";
+// import "./App.css";
+
+// export const ApiContext = createContext();
+
+// const App = () => {
+//   const [showStockSurferPro, setShowStockSurferPro] = useState(false);
+
+//   const handleGetStockSurferProClick = () => {
+//     setShowStockSurferPro(true);
+//   };
+
+//   return (
+//     <div className="app-container">
+//       <div>
+//         <img className="chart-icon" src={chartIcon} alt="Chart Icon"></img>
+//         <h1 className="header">StockSurfer</h1>
+//         <h3>
+//           Welcome to StockSurfer, where you can get data on your favorite
+//           stocks.
+//         </h3>
+//         <h3>Choose from some popular stocks here:</h3>
+//         <NavBar />
+//         <Routes>
+//           <Route path="/" element={<Spy />} />
+//           <Route path="/spy" element={<Spy />} />
+//           <Route path="/apple" element={<Apple />} />
+//           <Route path="/facebook" element={<Facebook />} />
+//           <Route path="/amazon" element={<Amazon />} />
+//           <Route path="/netflix" element={<Netflix />} />
+//           <Route path="/alphabet" element={<Alphabet />} />
+//           <Route path="/tesla" element={<Tesla />} />
+//           <Route path="/search" element={<StockSearch />} />
+//           <Route path="/pro" element={<StockSurferPro />} />
+//         </Routes>
+//         <h3>
+//           Interested in additional features? Click here to learn more about
+//           StockSurfer Pro
+//         </h3>
+//         <button
+//           className="stock-surfer-pro-button"
+//           onClick={handleGetStockSurferProClick}
+//         >
+//           Get StockSurfer Pro
+//         </button>
+//         {showStockSurferPro && <StockSurferPro />}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;
+
 import React, { useState, createContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Spy from "./components/Spy";
 import Apple from "./components/Apple";
@@ -17,10 +82,16 @@ export const ApiContext = createContext();
 
 const App = () => {
   const [showStockSurferPro, setShowStockSurferPro] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleGetStockSurferProClick = () => {
     setShowStockSurferPro(true);
+    navigate("/pro"); 
   };
+
+  
+  const isProRoute = location.pathname === "/pro";
 
   return (
     <div className="app-container">
@@ -31,8 +102,7 @@ const App = () => {
           Welcome to StockSurfer, where you can get data on your favorite
           stocks.
         </h3>
-        <h3>Choose from some popular stocks here:</h3>
-        <NavBar />
+        {isProRoute ? null : <NavBar />}
         <Routes>
           <Route path="/" element={<Spy />} />
           <Route path="/spy" element={<Spy />} />
@@ -43,24 +113,29 @@ const App = () => {
           <Route path="/alphabet" element={<Alphabet />} />
           <Route path="/tesla" element={<Tesla />} />
           <Route path="/search" element={<StockSearch />} />
+          <Route path="/pro" element={<StockSurferPro />} />
         </Routes>
-        <h3>
-          Interested in additional features? Click here to learn more about
-          StockSurfer Pro
-        </h3>
-        <button
-          className="stock-surfer-pro-button"
-          onClick={handleGetStockSurferProClick}
-        >
-          Get StockSurfer Pro
-        </button>
-        {showStockSurferPro && <StockSurferPro />}
+        {isProRoute ? null : (
+          <>
+            <h3>
+              Interested in additional features? Click here to learn more about
+              StockSurfer Pro
+            </h3>
+            <button
+              className="stock-surfer-pro-button"
+              onClick={handleGetStockSurferProClick}
+            >
+              Get StockSurfer Pro
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
 };
 
 export default App;
+
 
 
 

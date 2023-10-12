@@ -1,8 +1,9 @@
-.h2 {
-  font-size: xx-large;
+.h1 {
+
   font-weight: bolder;
   text-decoration: underline;
-  text-decoration-thickness: 1px; 
+  text-decoration-thickness: 1px;
+  color: white; 
 }
 
 .pro-features {
