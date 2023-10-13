@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Plot from 'react-plotly.js';
+import { TickerContext } from './StockSearch';
 
 const API_KEY = import.meta.env.VITE_SOME_KEY;
 
-const FiveMinuteChart = ({ ticker }) => {
+const FiveMinuteChart = () => {
+  const ticker = useContext(TickerContext);
+
   const [fiveMinuteDateList, setFiveMinuteDateList] = useState([]);
   const [fiveMinuteOpenList, setFiveMinuteOpenList] = useState([]);
   const [fiveMinuteHighList, setFiveMinuteHighList] = useState([]);
@@ -19,27 +22,21 @@ const FiveMinuteChart = ({ ticker }) => {
         `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${tickerToFetch}&interval=5min&apikey=${API_KEY}`
       )
       .then((response) => {
-        console.log('5 Minute Chart Data Response:', response.data);
+        const data = response.data['Time Series (5min)'];
 
-        const dates = [];
+        const dates = Object.keys(data).reverse(); 
         const opens = [];
         const highs = [];
         const lows = [];
         const closes = [];
 
-        for (const date in response.data['Time Series (5min)']) {
-          const data = response.data['Time Series (5min)'][date];
-          const openValue = parseFloat(data['1. open']);
-          const highValue = parseFloat(data['2. high']);
-          const lowValue = parseFloat(data['3. low']);
-          const closeValue = parseFloat(data['4. close']);
-
-          dates.unshift(date);
-          opens.unshift(openValue);
-          highs.unshift(highValue);
-          lows.unshift(lowValue);
-          closes.unshift(closeValue);
-        }
+        dates.forEach((date) => {
+          const point = data[date];
+          opens.push(parseFloat(point['1. open']));
+          highs.push(parseFloat(point['2. high']));
+          lows.push(parseFloat(point['3. low']));
+          closes.push(parseFloat(point['4. close']));
+        });
 
         setFiveMinuteDateList(dates);
         setFiveMinuteOpenList(opens);
@@ -192,5 +189,3 @@ const FiveMinuteChart = ({ ticker }) => {
 };
 
 export default FiveMinuteChart;
-
-
