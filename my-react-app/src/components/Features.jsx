@@ -1,7 +1,7 @@
 import React from "react";
 import image1 from "../assets/SearchFunction.png";
 import image2 from "../assets/market3.jpeg";
-import image3 from "../assets/WatchList.png";
+import image3 from "../assets/Watchlist.png";
 import image4 from "../assets/NewsFeed.png";
 
 function Features() {
