@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import Plot from 'react-plotly.js';
-
-const API_KEY = import.meta.env.VITE_SOME_KEY;
+import { ApiContext } from '../App'
 
 const Amazon = () => {
   const symbol = 'AMZN'; 
-
+  const { apiKEY, apiURL } = useContext(ApiContext);
   const [companyInfo, setCompanyInfo] = useState({});
   const [dateList, setDateList] = useState([]);
   const [closeList, setCloseList] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}`)
+      .get(`${apiURL}/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKEY}`)
       .then((response) => {
         console.log('Stock Data', response.data);
         
@@ -31,13 +30,13 @@ const Amazon = () => {
       });
 
     axios
-      .get(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${API_KEY}`)
+      .get(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${apiKEY}`)
       .then((response) => {
         console.log('Company Data', response.data);
         
         setCompanyInfo(response.data);
       });
-  }, [API_KEY, symbol]);
+  }, [apiKEY, symbol]);
 
   const chartData = [
     {
