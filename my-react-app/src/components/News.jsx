@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { TickerContext } from './StockSearch';
+import {ApiContext} from '../App'
 
-const News = ({ tickerToFetch, API_KEY }) => {
+const News = () => {
+  const ticker = useContext(TickerContext);
+  const { apiKEY } = useContext(ApiContext); 
+
   const [newsData, setNewsData] = useState([]);
 
   useEffect(() => {
     const getNews = () => {
       axios
         .get(
-          `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=${tickerToFetch}&apikey=${API_KEY}`
+          `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=${ticker}&apikey=${apiKEY}`
         )
         .then((response) => {
           console.log("News Data:", response.data);
@@ -19,10 +24,10 @@ const News = ({ tickerToFetch, API_KEY }) => {
         });
     };
 
-    if (tickerToFetch) {
+    if (ticker) {
       getNews();
     }
-  }, [tickerToFetch]);
+  }, [ticker]);
 
   return (
     <div>

@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, createContext } from "react";
 import axios from "axios";
 import Plot from "react-plotly.js";
 import "../styles/StockSearch.css";
 import FiveMinuteChart from "./FiveMinuteChart";
 import News from "./News";
-import { ApiContext } from '../App'
+import { ApiContext } from '../App';
 
+export const TickerContext = createContext();
 
 const StockSearch = () => {
   const { apiKEY, apiURL } = useContext(ApiContext);
@@ -28,7 +29,6 @@ const StockSearch = () => {
       )
       .then((response) => {
         if (response.data["Time Series (Daily)"]) {
-          console.log("Stock Data:", response.data);
           const dates = [];
           const closes = [];
           const opens = [];
@@ -70,7 +70,6 @@ const StockSearch = () => {
         `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${tickerToFetch}&apikey=${apiKEY}`
       )
       .then((response) => {
-        console.log("Company Info:", response.data);
         setCompanyInfo(response.data);
       })
       .catch((error) => {
@@ -95,201 +94,203 @@ const StockSearch = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Stock Ticker"
-          value={ticker}
-          onChange={(e) => {
-            const input = e.target.value;
-            const letterInput = input.replace(/[^A-Za-z]/g, "");
-            setTicker(letterInput);
-          }}
-          className="input-field"
-          maxLength={5}
-        />
-        <button className="submit-button" type="submit">
-          Submit
-        </button>
-      </form>
+      <TickerContext.Provider value={ticker}>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Stock Ticker"
+            value={ticker}
+            onChange={(e) => {
+              const input = e.target.value;
+              const letterInput = input.replace(/[^A-Za-z]/g, "");
+              setTicker(letterInput);
+            }}
+            className="input-field"
+            maxLength={5}
+          />
+          <button className="submit-button" type="submit">
+            Submit
+          </button>
+        </form>
 
-      {submitted && tickerNotFound && <p>Please enter a valid stock ticker</p>}
+        {submitted && tickerNotFound && <p>Please enter a valid stock ticker</p>}
 
-      {submitted && !tickerNotFound && dateList.length > 0 && (
-        <div>
-          <div className="company-info">
-            <h2>{companyInfo.Name} ({companyInfo.Symbol})</h2>
-            <p>Industry: {companyInfo.Industry}</p>
-            <p>Sector: {companyInfo.Sector}</p>
-            <p style={{ maxWidth: '400px', wordWrap: 'break-word', textAlign: 'center', margin: '0 auto' }}>
-              {companyInfo.Description}
-            </p>
-          </div>
-
+        {submitted && !tickerNotFound && dateList.length > 0 && (
           <div>
-            <label htmlFor="chartType">Select Chart Type:</label>
-            <select
-              id="chartType"
-              value={chartType}
-              onChange={(e) => setChartType(e.target.value)}
-            >
-              <option value="line">Line Chart</option>
-              <option value="candlestick">Candlestick Chart</option>
-            </select>
-          </div>
+            <div className="company-info">
+              <h2>{companyInfo.Name} ({companyInfo.Symbol})</h2>
+              <p>Industry: {companyInfo.Industry}</p>
+              <p>Sector: {companyInfo.Sector}</p>
+              <p style={{ maxWidth: '400px', wordWrap: 'break-word', textAlign: 'center', margin: '0 auto' }}>
+                {companyInfo.Description}
+              </p>
+            </div>
 
-          {chartType === "line" ? (
-            <Plot
-              data={[
-                {
-                  x: dateList,
-                  y: closeList,
-                  type: "scatter",
-                  mode: "lines",
-                  marker: { color: "orange" },
-                },
-              ]}
-              layout={{
-                title: `${ticker} Daily Stock Price`,
-                xaxis: {
-                  title: "Date",
-                  titlefont: {
-                    color: "white",
-                    family: "Arial, sans-serif",
-                    size: 18,
+            <div>
+              <label htmlFor="chartType">Select Chart Type:</label>
+              <select
+                id="chartType"
+                value={chartType}
+                onChange={(e) => setChartType(e.target.value)}
+              >
+                <option value="line">Line Chart</option>
+                <option value="candlestick">Candlestick Chart</option>
+              </select>
+            </div>
+
+            {chartType === "line" ? (
+              <Plot
+                data={[
+                  {
+                    x: dateList,
+                    y: closeList,
+                    type: "scatter",
+                    mode: "lines",
+                    marker: { color: "orange" },
                   },
-                  tickfont: {
-                    color: "white",
-                    family: "Arial, sans-serif",
-                    size: 14,
+                ]}
+                layout={{
+                  title: `${ticker} Daily Stock Price`,
+                  xaxis: {
+                    title: "Date",
+                    titlefont: {
+                      color: "white",
+                      family: "Arial, sans-serif",
+                      size: 18,
+                    },
+                    tickfont: {
+                      color: "white",
+                      family: "Arial, sans-serif",
+                      size: 14,
+                    },
+                    gridcolor: "grey",
                   },
-                  gridcolor: "grey",
-                },
-                yaxis: {
-                  title: "Closing Price",
-                  titlefont: {
-                    color: "white",
-                    family: "Arial, sans-serif",
-                    size: 18,
+                  yaxis: {
+                    title: "Closing Price",
+                    titlefont: {
+                      color: "white",
+                      family: "Arial, sans-serif",
+                      size: 18,
+                    },
+                    tickfont: {
+                      color: "white",
+                      family: "Arial, sans-serif",
+                      size: 14,
+                    },
+                    gridcolor: "grey",
                   },
-                  tickfont: {
-                    color: "white",
-                    family: "Arial, sans-serif",
-                    size: 14,
-                  },
-                  gridcolor: "grey",
-                },
-                plot_bgcolor: "black",
-                paper_bgcolor: "black",
-                font: {
-                  color: "white",
-                  family: "Arial, sans-serif",
-                  size: 14,
-                },
-                margin: {
-                  r: 10,
-                  t: 60,
-                  b: 40,
-                  l: 60,
-                },
-                hovermode: "x",
-              }}
-            />
-          ) : (
-            <Plot
-              data={[
-                {
-                  x: dateList,
-                  open: openList,
-                  high: highList,
-                  low: lowList,
-                  close: closeList,
-                  type: "candlestick",
-                  xaxis: "x2",
-                  yaxis: "y2",
-                },
-              ]}
-              layout={{
-                title: {
-                  text: `${ticker} Daily Candlestick Chart`,
+                  plot_bgcolor: "black",
+                  paper_bgcolor: "black",
                   font: {
                     color: "white",
                     family: "Arial, sans-serif",
-                    size: 18,
+                    size: 14,
                   },
-                },
-                plot_bgcolor: "black",
-                paper_bgcolor: "black",
-                dragmode: "zoom",
-                margin: {
-                  r: 10,
-                  t: 60,
-                  b: 40,
-                  l: 60,
-                },
-                hovermode: "x",
-                showlegend: false,
-                xaxis: {
-                  autorange: true,
-                  domain: [0, 2],
-                  type: "date",
-                  tickformat: "%Y-%m-%d",
-                  range: [dateList[dateList.length - 1], dateList[0]],
+                  margin: {
+                    r: 10,
+                    t: 60,
+                    b: 40,
+                    l: 60,
+                  },
+                  hovermode: "x",
+                }}
+              />
+            ) : (
+              <Plot
+                data={[
+                  {
+                    x: dateList,
+                    open: openList,
+                    high: highList,
+                    low: lowList,
+                    close: closeList,
+                    type: "candlestick",
+                    xaxis: "x2",
+                    yaxis: "y2",
+                  },
+                ]}
+                layout={{
                   title: {
-                    text: "Date",
+                    text: `${ticker} Daily Candlestick Chart`,
                     font: {
                       color: "white",
                       family: "Arial, sans-serif",
                       size: 18,
                     },
                   },
-                  tickfont: {
-                    color: "white",
-                    family: "Arial, sans-serif",
-                    size: 14,
+                  plot_bgcolor: "black",
+                  paper_bgcolor: "black",
+                  dragmode: "zoom",
+                  margin: {
+                    r: 10,
+                    t: 60,
+                    b: 40,
+                    l: 60,
                   },
-                },
-                yaxis: {
-                  title: {
-                    text: "Price",
-                    font: {
+                  hovermode: "x",
+                  showlegend: false,
+                  xaxis: {
+                    autorange: true,
+                    domain: [0, 2],
+                    type: "date",
+                    tickformat: "%Y-%m-%d",
+                    range: [dateList[dateList.length - 1], dateList[0]],
+                    title: {
+                      text: "Date",
+                      font: {
+                        color: "white",
+                        family: "Arial, sans-serif",
+                        size: 18,
+                      },
+                    },
+                    tickfont: {
                       color: "white",
                       family: "Arial, sans-serif",
-                      size: 18,
+                      size: 14,
                     },
                   },
-                  tickfont: {
+                  yaxis: {
+                    title: {
+                      text: "Price",
+                      font: {
+                        color: "white",
+                        family: "Arial, sans-serif",
+                        size: 18,
+                      },
+                    },
+                    tickfont: {
+                      color: "white",
+                      family: "Arial, sans-serif",
+                      size: 14,
+                    },
+                  },
+                  font: {
                     color: "white",
                     family: "Arial, sans-serif",
                     size: 14,
                   },
-                },
-                font: {
-                  color: "white",
-                  family: "Arial, sans-serif",
-                  size: 14,
-                },
-              }}
-            />
-          )}
+                }}
+              />
+            )}
 
-          <div className="fiveMinuteButton">
-            <button className="submit-button"onClick={handleShowFiveMinuteChart}>
-              {showFiveMinuteChart
-                ? "Hide 5 Min Chart"
-                : "Show 5 Min Chart"}
-            </button>
+            <div className="fiveMinuteButton">
+              <button className="submit-button" onClick={handleShowFiveMinuteChart}>
+                {showFiveMinuteChart
+                  ? "Hide 5 Min Chart"
+                  : "Show 5 Min Chart"}
+              </button>
+            </div>
+
+            {showFiveMinuteChart && <FiveMinuteChart />}
+
+            <div>
+              <h2 style={{ fontSize: "32px" }}>{ticker} News Feed</h2>
+            </div>
+
+            <News />
           </div>
-
-          {showFiveMinuteChart && <FiveMinuteChart ticker={ticker} />}
-
-          <div>
-          <h2 style={{ fontSize: "32px" }}>{ticker} News Feed</h2>
-          </div>
-
-          <News tickerToFetch={ticker} API_KEY={apiKEY} />
-        </div>
-      )}
+        )}
+      </TickerContext.Provider>
     </div>
   );
 };
