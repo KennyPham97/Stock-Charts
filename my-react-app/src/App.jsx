@@ -28,7 +28,7 @@ const App = () => {
   };
 
   const handleGetStockSurferProClick = () => {
-    window.location.href = "https://buy.stripe.com/test_fZe7tM5h7eR3dd6146";
+    window.location.href = "https://buy.stripe.com/test_cN26pIcJz5gtc92fZ1";
   };
 
   const isProRoute = location.pathname === "/pro";

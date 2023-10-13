@@ -3,8 +3,6 @@ import axios from 'axios';
 import Plot from 'react-plotly.js';
 import { ApiContext } from '../App';
 
-
-
 const Alphabet = () => {
   const symbol = 'GOOGL'; 
   const { apiKEY, apiURL } = useContext(ApiContext);
