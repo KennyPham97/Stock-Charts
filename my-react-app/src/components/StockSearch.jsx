@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import Plot from "react-plotly.js";
 import "../styles/StockSearch.css";
 import FiveMinuteChart from "./FiveMinuteChart";
 import News from "./News";
+import { ApiContext } from '../App'
 
-const API_KEY = import.meta.env.VITE_SOME_KEY;
 
 const StockSearch = () => {
+  const { apiKEY, apiURL } = useContext(ApiContext);
   const [ticker, setTicker] = useState("");
   const [companyInfo, setCompanyInfo] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -23,7 +24,7 @@ const StockSearch = () => {
   const fetchStockData = (tickerToFetch) => {
     axios
       .get(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${tickerToFetch}&apikey=${API_KEY}`
+        `${apiURL}/query?function=TIME_SERIES_DAILY&symbol=${tickerToFetch}&apikey=${apiKEY}`
       )
       .then((response) => {
         if (response.data["Time Series (Daily)"]) {
@@ -66,7 +67,7 @@ const StockSearch = () => {
 
     axios
       .get(
-        `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${tickerToFetch}&apikey=${API_KEY}`
+        `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${tickerToFetch}&apikey=${apiKEY}`
       )
       .then((response) => {
         console.log("Company Info:", response.data);
@@ -282,7 +283,11 @@ const StockSearch = () => {
 
           {showFiveMinuteChart && <FiveMinuteChart ticker={ticker} />}
 
-          <News tickerToFetch={ticker} API_KEY={API_KEY} />
+          <div>
+          <h2 style={{ fontSize: "32px" }}>{ticker} News Feed</h2>
+          </div>
+
+          <News tickerToFetch={ticker} API_KEY={apiKEY} />
         </div>
       )}
     </div>

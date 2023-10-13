@@ -17,8 +17,10 @@ import "./App.css";
 export const ApiContext = createContext();
 
 const App = () => {
-  const [apiURL, setApiURL] = useState("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}")
-  const apiKEY = import.meta.env.VITE_SOME_KEY
+  const [apiURL, setApiURL] = useState(
+    "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}"
+  );
+  const apiKEY = import.meta.env.VITE_SOME_KEY;
 
   const location = useLocation();
   const [showFeatures, setShowFeatures] = useState(false);
@@ -37,18 +39,15 @@ const App = () => {
     if (isProRoute) {
       document.body.classList.add("pro");
     } else {
-      
       document.body.classList.remove("pro");
     }
   }, [isProRoute]);
 
   useEffect(() => {
     if (isProRoute) {
-      
-      document.querySelector('.app-container').classList.add('pro');
+      document.querySelector(".app-container").classList.add("pro");
     } else {
-      
-      document.querySelector('.app-container').classList.remove('pro');
+      document.querySelector(".app-container").classList.remove("pro");
     }
   }, [isProRoute]);
 
@@ -58,23 +57,24 @@ const App = () => {
         <img className="chart-icon" src={chartIcon} alt="Chart Icon" />
         <h1 className="header">StockSurfer</h1>
         <h3>
-          Welcome to StockSurfer, where you can get data on your favorite stocks.
+          Welcome to StockSurfer, where you can get data on your favorite
+          stocks.
         </h3>
         {isProRoute ? null : <NavBar />}
         <ApiContext.Provider value={{ apiKEY, apiURL }}>
-        <Routes>
-          <Route path="*" element={<Spy />} />
-          <Route path="/" element={<Spy />} />
-          <Route path="/spy" element={<Spy />} />
-          <Route path="/apple" element={<Apple />} />
-          <Route path="/facebook" element={<Facebook />} />
-          <Route path="/amazon" element={<Amazon />} />
-          <Route path="/netflix" element={<Netflix />} />
-          <Route path="/alphabet" element={<Alphabet />} />
-          <Route path="/tesla" element={<Tesla />} />
-          <Route path="/search" element={<StockSearch />} />
-          <Route path="/pro" element={<StockSurferPro />} />
-        </Routes>
+          <Routes>
+            <Route path="*" element={<Spy />} />
+            <Route path="/" element={<Spy />} />
+            <Route path="/spy" element={<Spy />} />
+            <Route path="/apple" element={<Apple />} />
+            <Route path="/facebook" element={<Facebook />} />
+            <Route path="/amazon" element={<Amazon />} />
+            <Route path="/netflix" element={<Netflix />} />
+            <Route path="/alphabet" element={<Alphabet />} />
+            <Route path="/tesla" element={<Tesla />} />
+            <Route path="/search" element={<StockSearch />} />
+            <Route path="/pro" element={<StockSurferPro />} />
+          </Routes>
         </ApiContext.Provider>
         {isProRoute ? null : (
           <div>
@@ -86,7 +86,9 @@ const App = () => {
               <button className="feature-button" onClick={handleFeaturesClick}>
                 Why StockSurfer Pro?
               </button>
-              <div className={`feature-columns ${showFeatures ? "visible" : ""}`}>
+              <div
+                className={`feature-columns ${showFeatures ? "visible" : ""}`}
+              >
                 {showFeatures && <Features />}
               </div>
             </div>
@@ -100,6 +102,10 @@ const App = () => {
             </div>
           </div>
         )}
+        
+        <footer style={{marginTop:"100px"}}>
+          <p>Created by Kenny Pham &copy; 2023</p>
+        </footer>
       </div>
     </div>
   );
