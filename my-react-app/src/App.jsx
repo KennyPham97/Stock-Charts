@@ -60,6 +60,9 @@ const App = () => {
           Welcome to StockSurfer, offering you comprehensive data on your favorite
           stocks.
         </h3>
+        <h3>
+          Here are some popular stocks.
+        </h3>
         {isProRoute ? null : <NavBar />}
         <ApiContext.Provider value={{ apiKEY, apiURL }}>
           <Routes>
