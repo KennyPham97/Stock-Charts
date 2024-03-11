@@ -57,7 +57,7 @@ const App = () => {
         <img className="chart-icon" src={chartIcon} alt="Chart Icon" />
         <h1 className="header">StockSurfer</h1>
         <h3>
-          Welcome to StockSurfer, where you can get data on your favorite
+          Welcome to StockSurfer, offering you comprehensive data on your favorite
           stocks.
         </h3>
         {isProRoute ? null : <NavBar />}
